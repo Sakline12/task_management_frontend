@@ -1,0 +1,158 @@
+<!-- <div class="container mt-4">
+    <header class="bg-dark text-white p-2 mb-2 text-center">
+        <h1>Login</h1>
+    </header>
+
+    <form (ngSubmit)="onSubmit()" [formGroup]="form">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" formControlName="email" name="email" class="form-control"
+             placeholder="Enter Email" [ngClass]="{'is-invalid' : submitted && f['email'].errors}">
+
+             <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+
+                <div *ngIf="f['email'].errors['required']">
+                    Email Id is required
+                </div>
+                <div *ngIf="f['email'].errors['email']">
+                    Email must be a valid Email address
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" formControlName="password" name="password" class="form-control"
+            placeholder="Enter Password" [ngClass]="{'is-invalid' : submitted && f['password'].errors}">
+
+            <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+
+                <div *ngIf="f['password'].errors['required']">
+                   Password is required
+                </div>
+
+                <div *ngIf="f['password'].errors['minlength']">
+                    Password must be atleast 6 Characters
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-4">Login</button>
+
+     </form>
+
+</div> -->
+<div class="body p-0 ">
+
+    <div class="container py-5 ">
+        <div class="row d-flex align-items-center  ">
+          <div class="col-md-4 d-flex flex-column justify-content-center">
+           <h1>Welcome to</h1>
+           <h2>BacBon’s</h2>
+           <h3>Task Management</h3>
+           <h4>System</h4>
+           <div>
+              <img src="assets/images/image_4.png" alt="image" class="login">
+           </div>
+
+          </div>
+
+          <div class="col-md-4 rounded-start bg-white justify-content-center align-items-center p-5" >
+
+
+                  <form (ngSubmit)="onSubmit()" [formGroup]="form">
+                    <div class="form-group form-outline  mb-4">
+                        <h6 class="content">Admin Panel</h6>
+                      <h5>Please enter your email address and password</h5>
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" formControlName="email" name="email" class="form-control form-control-lg"
+                         placeholder="Enter Email" [ngClass]="{'is-invalid' : submitted && f['email'].errors}">
+
+                         <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+
+                            <div *ngIf="f['email'].errors['required']">
+                                Email Id is required
+                            </div>
+                            <div *ngIf="f['email'].errors['email']">
+                                Email must be a valid Email address
+                            </div>
+                        </div>
+                    </div>
+                  <div class="form-group form-outline mb-4">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" formControlName="password" name="password" class="form-control form-control-lg"
+                    placeholder="Enter Password" [ngClass]="{'is-invalid' : submitted && f['password'].errors}">
+
+                    <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+
+                        <div *ngIf="f['password'].errors['required']">
+                           Password is required
+                        </div>
+
+                        <div *ngIf="f['password'].errors['minlength']">
+                            Password must be atleast 6 Characters
+                        </div>
+                    </div>
+                </div>
+
+<div class="d-flex justify-content-around align-items-center mb-4">
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="" id="" checked />
+    <label class="form-check-label" for=""> Remember me </label>
+  </div>
+  <button type="button" class="btn btn-primary" (click)="openModal(template)">Forgot password?</button>
+</div>
+
+<ng-template #template>
+  <div class="modal-dialog" role="document">
+    <form #taskForm="ngForm" (ngSubmit)="forgetPassword()">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            Reset Password
+          </h5>
+          <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-12">
+              <p class="text-center">
+                Enter your email address, and we'll send you an email with an OTP to reset your password.
+              </p>
+              <div class="input-group mb-3">
+                <input type="text" name="email" class="form-control" [(ngModel)]="form.value.email" placeholder="Enter your email" required>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button type="submit" class="btn btn-light" [disabled]="!taskForm.valid">
+            Submit
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+
+                  <!-- Submit button -->
+                  <div class="d-grid gap-2">
+                      <button type="submit" click="reloadPage()" class="btn btn-primary btn-lg btn-block ">Log in</button>
+                  </div>
+                </form>
+
+          </div>
+          <div class="col-md-4 background rounded-end d-flex align-items-center p-5  ">
+
+              <div class="p-5 ">
+                  <img src="assets/images/image_2.png" alt="image" class="content2">
+              </div>
+
+          </div>
+        </div>
+      </div>
+
+</div>

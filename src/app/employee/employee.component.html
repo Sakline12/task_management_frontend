@@ -1,0 +1,518 @@
+<main class="today main-container mt-5">
+    <div class="serach-bar">
+      <div class="row d-flex">
+        <div class="create col-xl-4 col-md-6">
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-primary bg-success border-0" (click)="openModal(template)"> + Add New Employee</button>
+              <div class="alert alert-danger" [hidden]="!error">
+                {{ error }}
+              </div>
+              <!-- Modal -->
+              <ng-template #template >
+                <div class="modal-dialog p-2 bg-white " role="document">
+                  <form #taskForm="ngForm" (ngSubmit)="onSubmit()" [formGroup]="cform">
+                    <div class="modal-content border-0">
+                      <div class="modal-header">
+                        <h6 class="modal-title" id="exampleModalLabel">
+                          Add New Employee
+                        </h6>
+                        <button
+                          type="button"
+                          class="close1 bg-white"
+                          aria-label="Close"
+                          (click)="modalRef?.hide()"
+                        >
+                          <span aria-hidden="true" class="close1 text-dark"
+                            >Close</span
+                          >
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="row d-flex">
+                             <div class="col-md-6  mb-3">
+                                <div class="form-group">
+                                  <label for="first_name">First Name</label>
+                                  <input type="text" formControlName="first_name" name="first_name" class="form-control"
+                                  placeholder="Enter First Name" [ngClass]="{'is-invalid' : submitted && f['first_name'].errors}">
+
+                                  <div *ngIf="submitted && f['first_name'].errors" class="invalid-feedback">
+                                      <div *ngIf="f['first_name'].errors['required']">
+                                          First Name Is required
+                                      </div>
+                                  </div>
+                                </div>
+                             </div>
+                             <div class="col-md-6 create">
+                              <div class="form-group">
+                                <label for="last_name">Last Name</label>
+                                <input type="text"formControlName="last_name" name="last_name" class="form-control"
+                                 placeholder="Enter Last Name" [ngClass]="{'is-invalid' : submitted && f['last_name'].errors}">
+
+                                 <div *ngIf="submitted && f['last_name'].errors" class="invalid-feedback">
+
+                                    <div *ngIf="f['last_name'].errors['required']">
+                                        last Name Is required
+                                    </div>
+                                </div>
+                            </div>
+                             </div>
+                             <div class="col-md-6 create">
+                              <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" formControlName="email" name="email" class="form-control"
+                                 placeholder="Enter Email" [ngClass]="{'is-invalid' : submitted && f['email'].errors}">
+
+                                 <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+
+                                    <div *ngIf="f['email'].errors['required']">
+                                        Email Id is required
+                                    </div>
+                                    <div *ngIf="f['email'].errors['email']">
+                                        Email must be a valid Email address
+                                    </div>
+                                </div>
+                            </div>
+                             </div>
+                             <div class="col-md-6 create">
+                              <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" formControlName="password" name="password" class="form-control"
+                                placeholder="Enter Password" [ngClass]="{'is-invalid' : submitted && f['password'].errors}">
+
+                                <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+
+                                    <div *ngIf="f['password'].errors['required']">
+                                       Password is required
+                                    </div>
+
+                                    <div *ngIf="f['password'].errors['minlength']">
+                                        Password must be atleast 6 Characters
+                                    </div>
+                                </div>
+                            </div>
+                             </div>
+                             <div class="col-md-6 create">
+                              <div class="form-group">
+                                <label for="address">Address</label>
+                                <input type="text" formControlName="address" name="address" class="form-control"
+                                 placeholder="Enter Address" [ngClass]="{'is-invalid' : submitted && f['address'].errors}">
+
+                                 <div *ngIf="submitted && f['address'].errors" class="invalid-feedback">
+
+                                    <div *ngIf="f['address'].errors['required']">
+                                        Address Is required
+                                    </div>
+                                </div>
+                            </div>
+                             </div>
+                             <div class="col-md-6 create">
+                              <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input type="text" formControlName="phone" name="phone" class="form-control"
+                                 placeholder="Enter Contact Number" [ngClass]="{'is-invalid' : submitted && f['phone'].errors}">
+
+                                 <div *ngIf="submitted && f['phone'].errors" class="invalid-feedback">
+
+                                    <div *ngIf="f['phone'].errors['required']">
+                                        Contact Is required
+                                    </div>
+                                </div>
+                              </div>
+                             </div>
+                             <div class="col-md-6 create">
+                              <div class="form-group">
+                                <label for="department_id">Department</label>
+                                <div>
+                                    <select name="department_id"
+                                      class="form-select"  formControlName="department_id" id="department_id">
+
+                                      <option [ngValue]="undefined" disabled selected> Select </option>
+
+                                        <option  *ngFor="let dept of DepartmentList "[ngValue]="dept.id">
+                                            {{dept.name}}
+                                        </option>
+
+                                    </select>
+
+                                </div>
+                              </div>
+                             </div>
+                             <div class="col-md-6 create">
+                              <div class="form-group">
+                                <label for="designation_id">Designation</label>
+                                <div>
+                                    <select type="designation_id" name="designation_id" class="form-control" formControlName="designation_id"  >
+                                        <option [ngValue]="undefined" disabled selected>Select</option>
+                                        <option value={{dep.id}} *ngFor="let dep of DesignationList">
+                                            {{dep.title}}
+                                        </option>
+                                    </select>
+
+                                </div>
+                            </div>
+                             </div>
+                             <div class="col-md-6 create">
+                              <div class="form-group">
+
+                                <label for="type">User Type</label>
+                                <select type="text"formControlName="type" name="type" class="form-select"
+                                placeholder="Enter Type">
+                                <!-- <option [ngValue]="undefined" disabled selected>Select</option> -->
+                                <option>Admin</option>
+                                <option>Employee</option>
+                                </select>
+                            </div>
+                             </div>
+                             <div class="col-md-6">
+                              <div class="form-group">
+                                <label for="isActive">Active</label>
+                                <select type="text"formControlName="isActive" name="isActive" class="form-select"
+                                >
+                                <!-- <option value="undefined" disabled selected>Select</option> -->
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                                </select>
+
+
+                            </div>
+                             </div>
+                        </div>
+                        <div class="col-md-12 create">
+                            <div class="form-group">
+                              <label for="image">Post Image</label>
+                              <input type="file"formControlName="image" name="image" class="form-control"
+                              (change)="uploadImage($event)" >
+                          </div>
+                          </div>
+                         </div>
+                         <div class=" text-center align-items-center mb-4 ">
+                           <button type="submit" class="btn btn-primary ">Add Employee</button>
+                         </div>
+                       </div>
+                    </form>
+                    </div>
+              </ng-template>
+        </div>
+
+        <div class="search col-xl-4 col-md-6 inputbox">
+          <!-- <div class="icon">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </div> -->
+          <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
+          <input type="search" class="search_bar search_text" class="icon" class="form-control bg-warning search_bar search_text  " name="" id="myInput"    placeholder= "Search Employee" [(ngModel)]="searchText">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+        <div class="date col-xl-4 col-md-6 text-center">
+          <h6><i class="fa-solid fa-calendar"></i> {{date1 | date : "MMM d, yyyy"}}</h6>        </div>
+      </div>
+    </div>
+  <!-- Table with panel -->
+
+<div class="card card-cascade narrower mt-5 table-wrapper sort">
+
+<!--Card Title-->
+<div
+  class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center">
+  <h5>All Employees</h5>
+</div>
+<!--/Card Title-->
+<div class="table-responsive text-center">
+  <table class="table">
+    <div class="px-4">
+
+      <div class="table-wrapper">
+        <!--Table-->
+        <table class="table table-hover mb-0">
+
+          <!--Table head-->
+          <thead>
+            <tr>
+              <!-- <th scope="">#</th> -->
+              <!-- <th>
+                <input class="form-check-input" type="checkbox" id="checkbox">
+                <label class="form-check-label" for="checkbox" class="mr-2 label-table"></label>
+              </th> -->
+              <!-- <th class="th-lg">
+                ID
+              </th> -->
+              <th class="th-lg">
+                First_Name
+              </th>
+              <th class="th-lg">
+                Last_Name
+              </th>
+              <th class="th-lg">
+                Email
+              </th>
+              <th class="th-lg">
+                Phone
+              </th>
+              <th class="th-lg">
+               Dept.
+              </th>
+              <th class="th-lg">
+                Address
+              </th>
+              <th class="th-lg">
+                Designation
+              </th>
+              <th class="th-lg">
+                Type
+              </th>
+              <!-- <th class="th-lg">
+                Profile
+              </th> -->
+              <th class="th-lg">
+                Status
+              </th>
+              <th class="th-lg">
+                Action
+              </th>
+            </tr>
+          </thead>
+          <!--Table head-->
+          <!--Table body-->
+          <tbody>
+            <tr *ngFor="let use of userList | paginate: {itemsPerPage: 4, currentPage: use} | search: searchText">
+              <!-- <td>{{use.id}}</td> -->
+              <!-- <td>{{use.id}}</td> -->
+              <td>{{use.first_name}}</td>
+              <td>{{use.last_name}}</td>
+              <td>{{use.email}}</td>
+              <td>{{use.phone}}</td>
+              <td>{{use.department.name}}</td>
+              <td>{{use.address}}</td>
+              <td>{{use.designation.title}}</td>
+              <td>{{use.type}}</td>
+              <!-- <td><img
+                [src]="'http://localhost:8000/profile/' + use.image"
+                alt="Assignee Image"
+                class="rounded-circle ms-2 mt-2"
+                width="40"
+                height="40"
+              ></td> -->
+              <td [ngClass]="use.isActive ? 'active' : 'inactive'"><span class="status text-center">{{ use.isActive ? 'Active' : 'Inactive' }}</span></td>
+              <td>
+                <button type="button" class="btn btn-danger text-white btn-sm m-1 p-1" (click)=" deleteUser(use.id)"  ><i class="fa-solid fa-trash"></i> Delete</button>
+                <button class="btn btn-primary text-white btn-sm" (click)="openModal(update)" (click)="edit(use)"><i class="fa-solid fa-pen-to-square"></i> Edit</button>
+                <!-- routerLink="/profile/{{use.id}}" -->
+              </td>
+            </tr>
+          </tbody>
+          <!--Table body-->
+        </table>
+        <pagination-controls (pageChange)="use = $event" class="folat-right text-center">
+
+        </pagination-controls>
+        <!--Table-->
+      </div>
+    </div>
+  </table>
+</div>
+<ng-template #update>
+  <div class="modal-dialog p-2 bg-white " role="document">
+
+    <form #userForm="ngForm" (ngSubmit)="on_Submit()" [formGroup]="uploadform">
+      <div class="modal-content border-0">
+        <div class="modal-header">
+          <h6 class="modal-title" id="exampleModalLabel">
+            Update Employee Data
+          </h6>
+          <button
+            type="button"
+            class="close1 bg-white"
+            aria-label="Close"
+            (click)="modalRef?.hide()"
+          >
+            <span aria-hidden="true" class="close1 text-dark"
+              >Close</span
+            >
+          </button>
+          </div>
+          <div class="modal-body">
+            <div class="row d-flex">
+              <!-- <div class="col-md-6  mb-3">
+                <div class="form-group">
+                  <label for="id"> ID</label>
+                  <input type="text" name="userid" class="form-control" [(ngModel)]="userUpdate.id"
+                  placeholder="ID" >
+                </div>
+             </div> -->
+               <div class="col-md-6  mb-3">
+                  <div class="">
+                    <label for="first_name">First Name</label>
+                    <input type="text" formControlName="first_name" name="first_name" class="form-control" [(ngModel)]="userUpdate.first_name"
+                    placeholder="Enter First Name" [ngClass]="{'is-invalid' : submitted && f['first_name'].errors}">
+
+                    <div *ngIf="submitted && f['first_name'].errors" class="invalid-feedback">
+                        <div *ngIf="f['first_name'].errors['required']">
+                            First Name Is required
+                        </div>
+                    </div>
+                  </div>
+               </div>
+               <div class="col-md-6 create">
+                <div class="">
+                  <label for="last_name">Last Name</label>
+                  <input type="text"formControlName="last_name" name="last_name" class="form-control" [(ngModel)]="userUpdate.last_name"
+                   placeholder="Enter Last Name" [ngClass]="{'is-invalid' : submitted && f['last_name'].errors}">
+
+                   <div *ngIf="submitted && f['last_name'].errors" class="invalid-feedback">
+
+                      <div *ngIf="f['last_name'].errors['required']">
+                          last Name Is required
+                      </div>
+                  </div>
+              </div>
+               </div>
+               <div class="col-md-6 create">
+                <div class="">
+                  <label for="email">Email</label>
+                  <input type="email" formControlName="email" name="email" class="form-control" [(ngModel)]="userUpdate.email"
+                   placeholder="Enter Email" [ngClass]="{'is-invalid' : submitted && f['email'].errors}">
+
+                   <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+
+                      <div *ngIf="f['email'].errors['required']">
+                          Email Id is required
+                      </div>
+                      <div *ngIf="f['email'].errors['email']">
+                          Email must be a valid Email address
+                      </div>
+                  </div>
+              </div>
+               </div>
+               <!-- <div class="col-md-6 create">
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input type="password" formControlName="password" name="password" class="form-control"
+                  placeholder="Enter Password" [ngClass]="{'is-invalid' : submitted && f['password'].errors}">
+
+                  <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+
+                      <div *ngIf="f['password'].errors['required']">
+                         Password is required
+                      </div>
+
+                      <div *ngIf="f['password'].errors['minlength']">
+                          Password must be atleast 6 Characters
+                      </div>
+                  </div>
+              </div>
+               </div> -->
+
+               <div class="col-md-6 create">
+                <div class="">
+                  <label for="address">Address</label>
+                  <input type="text" formControlName="address" name="address" class="form-control"  [(ngModel)]="userUpdate.address"
+                   placeholder="Enter Address" [ngClass]="{'is-invalid' : submitted && f['address'].errors}">
+
+                   <div *ngIf="submitted && f['address'].errors" class="invalid-feedback">
+
+                      <div *ngIf="f['address'].errors['required']">
+                          Address Is required
+                      </div>
+                  </div>
+              </div>
+               </div>
+               <div class="col-md-6 create">
+                <div class="">
+                  <label for="phone">Phone</label>
+                  <input type="text" formControlName="phone" name="phone" class="form-control" [(ngModel)]="userUpdate.phone"
+                   placeholder="Enter Contact Number" [ngClass]="{'is-invalid' : submitted && f['phone'].errors}">
+
+                   <div *ngIf="submitted && f['phone'].errors" class="invalid-feedback">
+
+                      <div *ngIf="f['phone'].errors['required']">
+                          Contact Is required
+                      </div>
+                  </div>
+                </div>
+               </div>
+               <div class="col-md-6 create">
+                <div class="">
+                  <label for="department_id">Department</label>
+                  <div>
+                      <select name="department_id"
+                        class="form-select"  formControlName="department_id" id="department_id" [(ngModel)]="userUpdate.department_id">
+
+                        <option [ngValue]="undefined" disabled selected> Select </option>
+
+                          <option  *ngFor="let dept of DepartmentList "[ngValue]="dept.id">
+                              {{dept.name}}
+                          </option>
+
+                      </select>
+                      <!-- <div *ngIf="submitted && f['department_id'].errors" class="invalid-feedback">
+
+                          <div *ngIf="f['department_id'].errors['required']">
+                              department Is required
+                          </div>
+                      </div> -->
+                  </div>
+                </div>
+               </div>
+               <div class="col-md-6 create">
+                <div class="">
+                  <label for="designation_id">Designation</label>
+                  <div>
+                      <select  class="form-control" formControlName="designation_id" [(ngModel)]="userUpdate.designation_id"  [ngClass]="{'is-invalid' : submitted && f['designation_id'].errors}" [value]="designation_id">
+                          <option >Select</option>
+                          <option *ngFor="let dep of DesignationList" [value]="dep.id">{{ dep.title }}
+                          </option>
+                      </select>
+                      <div *ngIf="submitted && f['designation_id'].errors" class="invalid-feedback">
+
+                          <div *ngIf="f['designation_id'].errors['required']">
+                              designation Is required
+                          </div>
+                      </div>
+                  </div>
+              </div>
+               </div>
+               <div class="col-md-6 create">
+                <div class="">
+
+                  <label for="type">User Type</label>
+                  <select type="text"formControlName="type" name="type" class="form-select"
+                  placeholder="Enter Type"  [(ngModel)]="userUpdate.type">
+                  <!-- <option [ngValue]="undefined" disabled selected>Select</option> -->
+                  <option>Admin</option>
+                  <option>Employee</option>
+                  </select>
+              </div>
+               </div>
+               <div class="col-md-6">
+                <div class="">
+                  <label for="isActive">Active</label>
+                  <select type="text"formControlName="isActive" name="isActive" class="form-select"
+                  [(ngModel)]="userUpdate.isActive">
+                  <!-- <option value="undefined" disabled selected>Select</option> -->
+                  <option value="1">Yes</option>
+                  <option value="0">No</option>
+                  </select>
+              </div>
+               </div>
+          </div>
+          <!-- <div class="col-md-12 create">
+              <div class="form-group">
+                <label for="image">Post Image</label>
+                <input type="file"formControlName="image" name="image" class="form-control"
+                (change)="uploadImage($event)"  >
+            </div>
+            </div> -->
+           </div>
+           <div class=" text-center align-items-center mb-4 ">
+             <button type="submit" class="btn btn-primary ">Update</button>
+           </div>
+         </div>
+      </form>
+      </div>
+</ng-template>
+
+
+</div>
+<!-- Table with panel -->
+
+
+  </main>

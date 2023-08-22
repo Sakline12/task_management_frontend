@@ -1,0 +1,120 @@
+.details .card{
+    background: #FFFFFF;
+  box-shadow: -4px 4px 25px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  border: none;
+  }
+  .deadline{
+    border: 1px solid rgba(255, 77, 53, 0.55);
+    border-radius: 4px;
+    font-weight: 400;
+  }
+  .card .time{
+    background: rgba(255, 77, 53, 0.75);
+    color: white;
+    border-radius: 0px 20px;
+    position: relative;
+    padding: 8px;
+    position: sticky;
+
+  }
+  .detail .content p{
+    font-weight: 500;
+  font-size: 14px;
+  line-height: 130.69%;
+  /* or 18px */
+
+
+  color: rgba(0, 0, 0, 0.8);
+  }
+
+  .search_bar2{
+    padding: 14px 176px 16px 38px;
+      border: none;
+      background: #F5F5F5;
+      border-radius: 8px;
+
+  }
+  .search_text2{
+    font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: 0.025em;
+      color: rgba(0, 0, 0, 0.6);
+
+  }
+  .find .fa-solid{
+    position: relative;
+    left: 24px;
+    top: 17px;
+  }
+  .tList{
+    background: rgba(31, 207, 3, 0.75);
+  box-shadow: -4px 4px 20px rgba(31, 207, 3, 0.2);
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  padding: 5px 20px;
+  color: #FFFFFF;
+  }
+  .member .card{
+    background: #FCFBFF;
+  /* Drop Shadow Count - left - 2 */
+
+  box-shadow: -4px 4px 20px rgba(63, 141, 249, 0.3);
+  border-radius: 4px;
+  }
+  .comments .card{
+    background: #F5F5F5;
+  border-radius: 8px;
+  border: none;
+  }
+  .attachment .card{
+    background: #F5F5F5;
+  border-radius: 8px;
+  border: none;
+  }
+  .close1{
+    border: none;
+  background: #C7C7C7;
+  border-radius: 4px;
+  padding: 3px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  }
+  .close1{
+    border: none;
+  background: #C7C7C7;
+  border-radius: 4px;
+  padding: 3px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  }
+  .assign2{
+    padding: 10px 0px 0px 10x;
+  }
+  .title{
+    margin-top: 4.5rem;
+  }
+  .link{
+    text-decoration: none;
+    color: black;
+    text-transform: capitalize;
+  }
+  .pointer-cursor {
+    cursor: pointer;
+  }
+
+    .today{
+    padding-left: 5rem;
+  }
+
+  .chart-wrapper {
+  width: 500px; /* Adjust the width as per your needs */
+  height: 400px;
+  background-color: aqua;/* Adjust the height as per your needs */
+}

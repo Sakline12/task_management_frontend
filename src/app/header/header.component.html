@@ -1,0 +1,42 @@
+<div class="head " *ngIf="is_authenticated" [ngClass]="getHeadClass()">
+    <div class="head-content wrapper">
+        <div class="head-content-left">
+            <div class="title">
+                <h3 class="">Task Management System</h3>
+            </div>
+        </div>
+        <div class="head-content-right d-flex">
+
+            <div class="mx-2">
+                <!-- <i class="fa-regular fa-bell"></i> -->
+                <img *ngIf="image!=null" [src]="'http://localhost:8000/profile/' + image" alt=""
+                    class="rounded-circle ms-2" width="40" height="40" />
+
+            </div>
+            <div class="head-menu">
+
+                <!-- <h5 class="text-secondary" ></h5> -->
+                <!-- <select (change)="selectMenuItem($event)" class=" border-0  user text-success">
+                        <option value="" selected >{{first_name}}</option>
+
+                        <i class="fa-regular fa-user"></i> <option value="/profile"> Profile</option>
+                        <option value="/logout">Logout</option>
+                    </select> -->
+                <div ngbDropdown class="d-inline-block">
+                    <button type="button" class="btn border-0 user text-success" class="custom-button"
+                        id="dropdownBasic1" ngbDropdownToggle>
+                        {{first_name}} {{ last_name }}
+                    </button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="mt-2">
+                        <button ngbDropdownItem [routerLink]="'/profile'"> <span class="text-success fw-bolder"> <i
+                                    class="fa-solid fa-user"></i></span> Profile</button>
+                                    <form #taskForm="ngForm" >
+
+                        <button ngbDropdownItem (click)="onSubmit()"> <span class="text-success "> <i
+                                    class="fa-solid fa-arrow-right-from-bracket"></i> </span> Log Out</button>
+                                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

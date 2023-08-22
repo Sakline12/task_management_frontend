@@ -1,0 +1,137 @@
+
+.page {
+    margin-top: 5rem;
+  }
+  .headingP{
+      font-weight: 600;
+    font-size: 26px;
+    line-height: 30px;
+
+    /* Navy Blue - 400 */
+
+    color: #334B74;
+    }
+    .search_bar{
+      border: 1px solid #033D75;
+        box-shadow: -4px 4px 6px 2px rgba(87, 130, 242, 0.2);
+        border-radius: 8px;
+        padding: 6px;
+        background: #FFD233;
+
+    }
+    .search_button{
+      background: #334B74;
+      border: 1px solid #334B74;
+      border-radius: 8px;
+      font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 21px;
+
+    /* Yellow - 600 */
+    margin-left: 4px;
+    color: #FFD233;
+
+    }
+    .search_text{
+      font-style: normal;
+        font-weight: 400;
+        font-size: 17px;
+      line-height: 28px;
+        letter-spacing: 0.025em;
+        color: rgba(0, 0, 0, 0.6);
+        padding-left: 24px;
+    }
+    .inputbox{
+      position: relative;
+
+    }
+    .inputbox i{
+
+      position: absolute;
+      left: 17px;
+      top: 13px;
+
+    }
+    .filter .btn{
+      background: #FFFFFF;
+    border: 1px solid #C7C7C7;
+    border-radius: 8px;
+    }
+    .sort .btn{
+      background: #FFFFFF;
+    border: 1px solid #C7C7C7;
+    border-radius: 8px;
+    }
+
+    .filter select{
+      border: 1px solid #E4E4E4;
+    border-radius: 4px;
+    padding: 8px;
+    }
+    .modal-header .close{
+      margin-left: 9rem;
+    }
+    .close1{
+      border: none;
+    background: #C7C7C7;
+    border-radius: 4px;
+    padding: 3px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    }
+    .status-pending {
+      color: rgb(252, 252, 252);
+      .status{
+        background-color: rgb(191, 191, 56);
+      border-radius: 5px;
+      padding: 2px;
+      font-weight: 600;
+      }
+    }
+
+    .status-initiating {
+      color: rgb(255, 255, 255);
+      .status{
+        background-color: rgb(33, 33, 159);
+      border-radius: 5px;
+      padding: 2px;
+      font-weight: 600;
+      }
+    }
+
+    .status-onhold {
+      color: rgb(249, 247, 248);
+      .status{
+        background-color: rgb(219, 83, 131);
+      border-radius: 5px;
+      padding: 2px;
+      font-weight: 600;
+      }
+    }
+    .status-completed {
+      color: green;
+    }
+  // .status{
+  //   background-color: rgb(219, 219, 219);
+  // border-radius: 5px;
+  // padding: 2px;
+  // font-weight: 600;
+  // }
+    /* project end */
+
+    .cell{
+    text-decoration: none;
+    border-radius: 5px;
+    padding: 2px;
+    overflow: auto;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+  .today{
+    padding-left: 5rem;
+  }

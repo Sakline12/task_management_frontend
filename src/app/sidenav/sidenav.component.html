@@ -1,0 +1,147 @@
+<div class="sidenav" *ngIf="is_authenticated" [ngClass]="collapsed ? 'sidenav-collapsed' : ''">
+  <div class="logo-container">
+    <button class="logo" (click)="toggleCollapse()">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+    <div class="logo-text" @fadeInOut *ngIf="collapsed">
+      <h1 class="logo-text" *ngIf="type === 'Admin'"> ADMIN PANEL</h1>
+      <h1 class="logo-text" *ngIf="type === 'Employee'">EMPLOYEE</h1>
+    </div>
+    <button
+      class="btn-close"
+      @rotate
+      *ngIf="collapsed"
+      (click)="closeSidenav()"
+    >
+      <i class="fal fa-times close-icon"></i>
+    </button>
+  </div>
+  <ul class="sidenav-nav">
+    <!-- <li class="sidenav-nav-item" *ngFor="let data of navData">
+            <a class="sidenav-nav-link" [routerLink]="[data.routeLink]" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}">
+                <i class="sidenav-link-icon" [class]="data.icon"></i>
+                <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">
+                    {{data.label}}
+                </span>
+            </a>
+        </li> -->
+    <ng-container *ngFor="let data of navData">
+      <li class="sidenav-nav-item">
+        <a
+          class="sidenav-nav-link"
+          routerLink="/dashboard"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <i class="sidenav-link-icon" [class]="data.icon"></i>
+          <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">
+            {{ data.label }}
+          </span>
+        </a>
+      </li>
+    </ng-container>
+    <ng-container *ngFor="let data of navData2">
+      <li class="sidenav-nav-item" *ngIf="type === 'Admin'">
+        <a
+          class="sidenav-nav-link"
+          routerLink="/projects"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <i class="sidenav-link-icon" [class]="data.icon"></i>
+          <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">
+            {{ data.label }}
+          </span>
+        </a>
+      </li>
+    </ng-container>
+    <ng-container *ngFor="let data of navData8">
+      <li class="sidenav-nav-item" *ngIf="type === 'Employee'">
+        <a
+          class="sidenav-nav-link"
+          routerLink="/userProjects"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <i class="sidenav-link-icon" [class]="data.icon"></i>
+          <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">
+            {{ data.label }}
+          </span>
+        </a>
+      </li>
+    </ng-container>
+    <ng-container *ngFor="let data of navData7">
+      <li class="sidenav-nav-item" *ngIf="type === 'Employee'">
+        <a
+          class="sidenav-nav-link"
+          routerLink="/task"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <i class="sidenav-link-icon" [class]="data.icon"></i>
+          <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">
+            {{ data.label }}
+          </span>
+        </a>
+      </li>
+    </ng-container>
+
+    <ng-container *ngFor="let data of navData3">
+      <li class="sidenav-nav-item" *ngIf="type === 'Admin'">
+        <a
+          class="sidenav-nav-link"
+          routerLink="/tasks"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <i class="sidenav-link-icon" [class]="data.icon"></i>
+          <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">
+            {{ data.label }}
+          </span>
+        </a>
+      </li>
+    </ng-container>
+    <ng-container *ngFor="let data of navData4">
+      <li class="sidenav-nav-item" *ngIf="type === 'Admin'">
+        <a
+          class="sidenav-nav-link"
+          routerLink="/employee"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <i class="sidenav-link-icon" [class]="data.icon"></i>
+          <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">
+            {{ data.label }}
+          </span>
+        </a>
+      </li>
+    </ng-container>
+    <ng-container *ngFor="let data of navData5">
+      <li class="sidenav-nav-item" *ngIf="expectedRole === 'Admin'">
+        <a
+          class="sidenav-nav-link"
+          routerLink="/profile"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <i class="sidenav-link-icon" [class]="data.icon"></i>
+          <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">
+            {{ data.label }}
+          </span>
+        </a>
+      </li>
+    </ng-container>
+<ng-container *ngFor="let data of navData6">
+            <li class="sidenav-nav-item"  >
+                <a class="sidenav-nav-link"  (click)="onSubmit()" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}">
+                <i class="sidenav-link-icon" [class]="data.icon"></i>
+                <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">
+                    {{data.label}}
+                </span>
+                </a>
+            </li>
+        </ng-container>
+  </ul>
+</div>

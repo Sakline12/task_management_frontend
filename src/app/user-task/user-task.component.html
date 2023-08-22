@@ -1,0 +1,304 @@
+<div class="today container-fluid page ">
+    <div class="d-flex page__box p-3 ">Tasks</div>
+    <div class=" shadow p-3 ">
+      <div class=" text-center">
+        <main class="main-container">
+        <div class="serach-bar">
+          <div class="row d-flex justify-content-center">
+            <!-- project create start -->
+
+            <!-- project create end -->
+            <div class="search col-xl-4 col-md-6 inputbox">
+              <input type="search" class="search_bar search_text" class="form-control bg-warning search_bar search_text  " name="" id="myInput"    placeholder= "Search by Projects" [(ngModel)]="searchText">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+
+            <!-- <div class="sort col-xl-2 col-md-6">
+              <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                <button type="button" class="btn btn-secondary text-secondary"><i class="fa-solid fa-arrow-up-a-z"></i> Sort</button>
+                <div class="btn-group" role="group">
+                  <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle text-secondary" data-bs-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                    <a class="dropdown-item" href="#">Title A - Z</a>
+                    <a class="dropdown-item" href="#">Title Z - A</a>
+                    <a class="dropdown-item" href="#">New to Old</a>
+                    <a class="dropdown-item" href="#">Old to New</a>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+            <div class="date col-xl-4 col-md-6">
+              <h6><i class="fa-solid fa-calendar"></i>{{date1 | date : "MMM d, yyyy"}}</h6>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="main-cards">
+
+          <div class="card">
+            <div class="card-inner">
+              <p class="text-primary">PRODUCTS</p>
+              <span class="material-icons-outlined text-blue">inventory_2</span>
+            </div>
+            <span class="text-primary font-weight-bold">249</span>
+          </div>
+
+          <div class="card">
+            <div class="card-inner">
+              <p class="text-primary">PURCHASE ORDERS</p>
+              <span class="material-icons-outlined text-orange">add_shopping_cart</span>
+            </div>
+            <span class="text-primary font-weight-bold">83</span>
+          </div>
+
+          <div class="card">
+            <div class="card-inner">
+              <p class="text-primary">SALES ORDERS</p>
+              <span class="material-icons-outlined text-green">shopping_cart</span>
+            </div>
+            <span class="text-primary font-weight-bold">79</span>
+          </div>
+
+          <div class="card">
+            <div class="card-inner">
+              <p class="text-primary">INVENTORY ALERTS</p>
+              <span class="material-icons-outlined text-red">notification_important</span>
+            </div>
+            <span class="text-primary font-weight-bold">56</span>
+          </div>
+
+        </div> -->
+
+        <!-- Table with panel -->
+
+<div class="card  narrower mt-5 table-wrapper ">
+
+    <!--Card Title-->
+    <div
+      class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center">
+      <h5>My Tasks</h5>
+    </div>
+    <!--/Card Title-->
+    <div class="table-responsive">
+      <table class="table">
+        <div class="px-4">
+          <div class="table-wrapper" id="tab" >
+            <!--Table-->
+            <table class="table table-hover mb-0">
+              <!--Table head-->
+              <thead >
+                <tr>
+                  <th class="th-lg">
+                    Created By
+                  </th>
+                  <th class="th-lg">
+                     Project Name
+                  </th>
+                  <th class="th-lg">
+                     Task Name
+                  </th>
+                  <th class="th-lg">
+                    Description
+                  </th>
+                  <th class="th-lg ">
+                    Status
+                    <!-- *ngFor="let emp of ProjectList"> {{emp.ProjectList}} -->
+                    <!-- {{emp.status}} -->
+                    <!-- <span [ngClass]="getStatusColor(status)">Status: {{ status }}</span> -->
+                  </th>
+                  <th class="th-lg">
+                    Start Date
+                  </th>
+                  <th class="th-lg">
+                    End Date
+                  </th>
+                  <th class="th-lg">
+                    Action
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr  *ngFor="let ts of TaskList  | paginate: {itemsPerPage: 4, currentPage: ts} | search: searchText">
+                  <!-- <td>{{ ts.task.id }}</td> -->
+                  <td>{{ts.task.user.first_name}}{{ts.task.user.last_name}}</td>
+                  <td>{{ts.task.project.name}}</td>
+                  <td>{{ts.task.name}}</td>
+                  <td>
+                    <div class="scrollable-cell p-0 " >
+                      <textarea disabled class=" cell p-2 bg-white" rows="5" cols="25" onscroll="showScrollValue()">{{ts.task.description}}</textarea>
+                      </div>
+                  </td>
+                  <!-- //[ngStyle]="{'color': (cell.content === 'Initiate') ? 'green' : (cell.content === 'Pending') ? 'red' : (cell.content === 'Onhold') ? 'yellow' : ''}" -->
+                  <td [ngClass]="getStatusClass(ts.task.status)" ><span class="status text-center">{{ts.task.status}}</span></td>
+                  <td>{{ts.task.start_date}}</td>
+                  <td>{{ts.task.end_date}}</td>
+                  <td>
+                  <!-- <button type="button" class="btn btn-danger text-white btn-sm m-1 p-1 " (click)="deleteTask(ts.id)" ><i class="fa-solid fa-trash"></i> Delete</button> -->
+                    <!-- <button class="btn btn-primary text-white btn-sm " routerLink="/projectEdit/{{emp.id}}"><i class="fa-solid fa-pen-to-square"></i> Edit</button> -->
+                    <button class="btn btn-primary text-white btn-sm" (click)="openModal(update)" (click)="edit(ts.task)" ><i class="fa-solid fa-pen-to-square"></i> Edit</button>
+                    <button class="btn btn-success text-white btn-sm m-1 p-1" routerLink="/taskDetails/{{ts.task.id}}" ><i class="fa-solid fa-eye"></i> Details</button>
+                  </td>
+                </tr>
+
+              <!--Table body-->
+            </table>
+            <pagination-controls  class="folat-right">
+
+            </pagination-controls>
+            <!--Table-->
+          </div>
+        </div>
+      </table>
+    </div>
+    <ng-template #update>
+      <div class="modal-dialog mt-0" role="document">
+          <div class="modal-dialog p-2" role="document">
+            <form #taskForm="ngForm" (ngSubmit)="on_Submit()" >
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">
+                    UpdateTask
+                  </h5>
+                  <button
+                    type="button"
+                    class="close1 bg-white"
+                    aria-label="Close"
+                    (click)="modalRef?.hide()"
+                  >
+                    <span aria-hidden="true" class="close1 text-dark"
+                      >Close</span
+                    >
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <!-- <div class="row d-flex">
+                    <div class="col-md-6 create">
+                      <label for="name" class="text-info"><small>User Name</small></label>
+                      <div class="input-group mb-3">
+
+                        <input
+                    type="text"
+                    name="user"
+                    class="form-control"
+                    aria-label="Default"
+                   [(ngModel)]="taskUpdate.user_id"
+                    placeholder="User Name"
+                    required
+                  />
+                      </div>
+                    </div>
+                    <div class="col-md-6 create">
+                      <label for="name" class="text-info"><small>Project Name</small></label>
+                      <div class="input-group mb-3">
+
+                        <input
+                          type="text"
+                          name="Project Name"
+                          class="form-control"
+                          aria-label="Default"
+                          [(ngModel)]="taskUpdate.name"
+                          placeholder="Project Name"
+                          required
+                        />
+                      </div>
+                    </div>
+                  </div> -->
+                  <div class="row d-flex">
+                    <div class="col-md-6 create">
+                      <label for="name" class="text-info"><small>Task Name</small></label>
+                      <div class="input-group mb-3">
+
+                        <input
+                          type="text"
+                          name="Task Name"
+                          class="form-control"
+                          aria-label="Default"
+                          [(ngModel)]="taskUpdate.name"
+                          placeholder="Task Name"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6 create">
+                      <label for="name" class="text-info"><small>Status</small></label>
+                      <div class="input-group mb-4">
+
+                        <select  type="text"
+                        name="Status"
+                        class="form-select"
+                        aria-label="Default"
+                         [(ngModel)]="taskUpdate.status"
+                        placeholder="status"
+                        required>
+
+                        <option value="selected"class="text-primary" disabled selected>Status</option>
+                        <option >Initiate</option>
+                        <option>Pending</option>
+                        <option>Onhold</option>
+                        <option>Finished</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-2">
+                    <label for="name" class="text-info"><small>Description</small></label>
+                    <div class="col-md-12 mb-3">
+                      <textarea
+                        id="w3review"
+                        name="w3review"
+                        rows="4"
+                        cols="60"
+                        class="form-control"
+                        [(ngModel)]="taskUpdate.description"
+                        placeholder="Description"
+                        required
+                      ></textarea>
+                    </div>
+                  </div>
+                  <div class="row d-flex">
+
+                    <div class="col-md-6 create">
+                      <label for="name" class="text-info"><small>Start Date</small></label>
+                      <input
+                        type="date"
+                        name="start_date"
+                        class="form-control start_date"
+                        aria-label="Default"
+                         [(ngModel)]="taskUpdate.start_date"
+                        placeholder="Deadline"
+                        required
+                      />
+
+                    </div>
+
+                    <div class="col-md-6 create ">
+                      <label for="name" class="text-info"><small>End Date</small></label>
+                      <input
+                        type="date"
+                        name="end_date"
+                        class="form-control end_date"
+                        aria-label="Default"
+                         [(ngModel)]="taskUpdate.end_date"
+                        placeholder="Deadline"
+                        required
+                      />
+                    </div>
+                    </div>
+                </div>
+                <div class="footer text-center align-items-center mb-4">
+                  <button type="submit" class="btn btn-primary"  >
+                    Update
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+      </div>
+    </ng-template>
+  </div>
+  <!-- Table with panel -->
+      </main>
+      </div>
+    </div>
+  </div>

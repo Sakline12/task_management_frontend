@@ -1,0 +1,324 @@
+<div class="today">
+  <div class="text-center">
+    <main class="main-container">
+      <div class="main-title mt-5">
+        <h5 class="text-start titlee">Task Details</h5>
+      </div>
+      <div class="container-fluid page mt-1">
+        <form [formGroup]="myform" *ngIf="myform">
+          <div class="d-flex page__box mt-2"></div>
+          <div class="details wrapper">
+            <div class="row d-flex wrapper">
+              <div class="col-xl-5 col-md-6 mb-2">
+                <div class="card p-0">
+                  <div class="text-end">
+                    <label for="time" class="time"
+                      >Deadline: {{ endDate | date : "mediumDate" }}</label
+                    >
+                  </div>
+                  <!-- <div class="row detail">
+                    <div class="d-flex justify-content-start ms-5">
+                      <h4>{{name}}</h4>
+                    </div>
+                    <div class="card-body col-xl-6">
+                      <div class="ms-5">
+                        <p>Created By: {{ created_by }}</p>
+                        <p>Status: {{ status }}</p>
+                      </div>
+                    </div>
+                    <div class="card-body content col-xl-6 ">
+                      <div class="">
+                        <h5>Description</h5>
+                        <p>{{ description }}</p>
+                      </div>
+                    </div>
+                  </div> -->
+                  <div class="row detail">
+                    <div class="card-body content col-xl-12">
+                      <div class="text-start">
+                        <h3 class="">{{ name }}</h3>
+                        <!-- <h6><span class="text-info">Client Name:</span> {{client_id}}</h6> -->
+                        <h6>
+                          <span class="text-info">Description:</span>
+                          {{ description }}
+                        </h6>
+                        <!-- <h6><span class="text-info">Remarks:</span> {{ remarks}} </h6> -->
+                      </div>
+                    </div>
+                    <div class="card-body col-xl-12">
+                      <div>
+                        <p class="text-success">Created By: {{ created_by }}</p>
+                        <p class="text-success">Status: {{ status }}</p>
+                        <!-- <p class="text-success"> Supervisor: {{supervisor}}</p> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-5 col-md-6 mb-2">
+                <div class="stretch-card">
+                  <div class="card">
+                    <div class="card-body">
+                      <!-- <h4 class="card-title">Line chart</h4> -->
+                      <div class="card-body">
+                          <div class="chart-wrapper">
+                          <canvasjs-chart
+                          id="chartContainer"
+                          [options]="chartOptions"
+                          ></canvasjs-chart>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-2 col-md-6">
+                <div class="title member mb-2">
+                  <div>
+                    <button
+                      *ngIf="type === 'Admin'"
+                      type="button"
+                      class="btn btn-primary mb-2"
+                      (click)="openModal(template)"
+                    >
+                      +Assign Member
+                    </button>
+                  </div>
+
+                  <h6 class="font-weight-bold text-start">MemBers</h6>
+                  <div class="card p-0">
+                    <div class="card-body p-0">
+                      <div
+                        *ngFor="let assignee of task.data.task_assign"
+                        class="d-flex"
+                      >
+                        <img
+                          [src]="
+                            'http://localhost:8000/profile/' + assignee.image
+                          "
+                          alt="Assignee Image"
+                          class="rounded-circle ms-2 mt-2"
+                          width="40"
+                          height="40"
+                        />
+                        <p class="mt-3 ms-2">{{ assignee.user }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="information d-flex">
+        <div class="col-xl-6 col-md-6 comments p-3">
+          <form [formGroup]="commentform" *ngIf="commentform">
+            <div class="main-title">
+              <h4 class="font-weight-bold">Create a comment</h4>
+            </div>
+            <div class="card">
+              <textarea
+                rows="3"
+                placeholder="Add a comment"
+                class="form-control"
+                formControlName="comment_box"
+              ></textarea>
+              <div>
+                <button
+                  class="btn btn-primary mt-3"
+                  (click)="create_comment()"
+                  type="submit"
+                  [disabled]="
+                    commentform.get('comment_box')?.invalid ||
+                    sending ||
+                    commentform.get('comment_box')?.pristine
+                  "
+                >
+                  <span
+                    *ngIf="sending"
+                    class="spinner-border spinner-border-sm me-2"
+                  ></span>
+                  Send
+                </button>
+              </div>
+
+              <h4 class="mt-4">Comments:</h4>
+              <div class="card col-xl-12 col-md-6 sm-6 mt-2">
+                <div class="comment mt-auto text-justify">
+                  <div class="data-bs-toggle">
+                    <div
+                      *ngFor="
+                        let ts of commentList
+                          | paginate : { itemsPerPage: 3, currentPage: ts }
+                      "
+                      class="shadow p-3 mb-2 bg-body rounded"
+                    >
+                      <div class="d-flex">
+                        <img
+                          [src]="'http://localhost:8000/profile/' + ts.image"
+                          alt=""
+                          class="rounded-circle ms-2 mt-2"
+                          width="40"
+                          height="40"
+                        />
+                        <h5 class="ms-2 mt-3">{{ ts.user_name }}</h5>
+                        <div class="ms-auto">
+                          <span class="mt-3">{{
+                            ts.date | date : "MMM d, yyyy"
+                          }}</span>
+                        </div>
+                      </div>
+                      <div class="d-flex">
+                        <div>
+                          <p class="ms-2 mt-auto">{{ ts.comment_box }}</p>
+                        </div>
+                      </div>
+                      <div class="ms-auto text-end">
+                        <button
+                          type="btn btn-sm-5 btn-danger"
+                          class="mt-2 commentDelete"
+                          (click)="delete_a_comment(ts.id)"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                      <!-- <p class="ms-2 mt-auto">{{ ts.comment_box }}</p><button type="btn btn-sm-5 btn-danger " class="text-center">Delete</button> -->
+                      <!-- <button type="btn btn-sm-5 btn-danger " class=" ms-5 text-end">Delete</button> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <pagination-controls
+                (pageChange)="ts = $event"
+                class="folat-right"
+              >
+              </pagination-controls>
+            </div>
+          </form>
+        </div>
+
+        <div class="col-xl-6 col-md-6 attachment mt-3">
+          <form [formGroup]="uploadform">
+            <div class="main-title">
+              <h4 class="font-weight-bold">Attachments</h4>
+            </div>
+            <div class="card bg-light border-2 border-dark">
+              <input
+                type="file"
+                class="form-control"
+                (change)="imageUpload($event)"
+                formControlName="file"
+                placeholder="Upload"
+              />
+              <div>
+                <button
+                  class="btn btn-primary mt-3 mb-2"
+                  (click)="create_file()"
+                  type="submit"
+                  [disabled]="
+                    uploadform.get('file')?.invalid ||
+                    loading ||
+                    uploadform.get('file')?.pristine
+                  "
+                >
+                  <span
+                    *ngIf="loading"
+                    class="spinner-border spinner-border-sm me-2"
+                  ></span>
+                  Upload
+                </button>
+              </div>
+            </div>
+          </form>
+          <div class="card col-xl-6 col-md-6 sm-6 bg-white mt-2">
+            <h4 class="mb-3 text-primary">Task images:</h4>
+            <div
+              style="
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                grid-gap: 10px;
+              "
+            >
+              <div
+                *ngFor="let ts of imageList"
+                style="margin-right: 10px; position: relative"
+              >
+                <a
+                  href="javascript:void(0)"
+                  (click)="
+                    openImageWindow('http://localhost:8000/images/' + ts.file)
+                  "
+                >
+                  <img
+                    [src]="'http://localhost:8000/images/' + ts.file"
+                    width="60"
+                    height="60"
+                  />
+                </a>
+                <div class="ms-auto text-end">
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-danger commentDelete rounded-circle btn_img_dlt ms-5 mb-3 text-center"
+                    (click)="delete_a_file(ts.id)"
+                  >
+                    <div class="">-</div>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <ng-template #template>
+          <div class="" role="document">
+            <div class="modal-content m-0 w-100 w-100">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Assign Task</h5>
+                <button
+                  type="button"
+                  class="close1 bg-secondery border-0"
+                  aria-label="Close"
+                  (click)="modalRef?.hide()"
+                >
+                  <span aria-hidden="true" class="close1 text-dark">Close</span>
+                </button>
+              </div>
+
+              <div *ngIf="dropdownSettings" class="modal-body m-0">
+                <div class="row d-flex">
+                  <div class="col-md-6 mb-3 w-100">
+                    <ng-select
+                      [items]="UserList"
+                      class="col-md-12"
+                      [multiple]="true"
+                      bindLabel="text"
+                      bindValue="id"
+                      [(ngModel)]="CheckIds"
+                    >
+                      <ng-template ng-option-tmp let-item="item">
+                        <img
+                          [src]="item.imageUrl"
+                          class="option-image"
+                          alt="Option Image"
+                          class="rounded-circle ms-2 mb-2"
+                          width="40"
+                          height="40"
+                        />
+                        {{ item.text }}
+                      </ng-template>
+                    </ng-select>
+                  </div>
+                </div>
+                <button type="button" (click)="onSubmit()" class="btn btn-info">
+                  Submit
+                </button>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </main>
+  </div>
+</div>

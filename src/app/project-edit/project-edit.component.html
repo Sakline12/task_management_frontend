@@ -1,0 +1,232 @@
+<!-- <div class="edit">
+    <form (ngSubmit)="onSubmit()"  [formGroup]="myform" *ngIf="myform" >
+      <div class="mt-5">
+        <label for="id" class="form-label">Id</label>
+        <input type="text" class="form-control" formControlName="id" />
+      </div>
+      
+      <div>
+        <select
+          name="client_id"
+          class="form-control mt-3"
+          
+          aria-label="ngSelected"
+          formControlName="client_id"
+        >
+          <option ng-selected="expression">Client Name</option>
+          <option  ngValue={{pro.id}} *ngFor="let pro of ClientList">
+            {{ pro.name }}
+          </option>
+        </select>
+      </div>
+        
+        
+  
+      <div class="mt-5">
+        <label for="user_id" class="form-label">Created By</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="user_id"
+        />
+      </div>
+      
+      <div class="mt-5">
+        <label for="name" class="form-label">Task Name</label>
+        <input type="text" class="form-control" formControlName="name" />
+      </div>
+  
+      <div class="mt-5">
+        <label for="description" class="form-label">Description</label>
+        <input type="text" class="form-control" formControlName="description" />
+      </div>
+  
+      <div class="mt-5">
+        <label for="status" class="form-label">Status</label>
+        <input type="text" class="form-control" formControlName="status" />
+      </div>
+      <div class="mt-5">
+        <label for="supervisor" class="form-label">Supervisor</label>
+        <input type="text" class="form-control" formControlName="status" />
+      </div>
+      <div class="mt-5">
+        <label for="remarks" class="form-label">Remarks</label>
+        <input type="text" class="form-control" formControlName="remarks" />
+      </div>
+  
+      <div class="mt-5">
+        <label for="start_date" class="form-label">Start Date</label>
+        <input type="date" class="form-control" formControlName="start_date" />
+      </div>
+  
+      <div class="mt-5">
+        <label for="end_date" class="form-label">End Date</label>
+        <input type="date" class="form-control" formControlName="end_date" />
+      </div>
+  
+      <div class="mt-5">
+        <button class="btn btn-success" type="submit">OK</button>
+      </div>
+    </form>
+  </div>
+   -->
+
+<div class="container">
+  <div class="edit ">
+    
+      <form #taskForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="row col-xl-12">
+         
+          <div class="col-md-6 create">
+                <div class="input-group mb-3">
+                  <input
+                    type="text"
+                    name="Project id"
+                    class="form-control"
+                    aria-label="Default"
+                    [(ngModel)]="form.id"
+                    placeholder="Project id"
+                    required
+                  />
+                </div>
+          </div>
+          
+            <div class="">
+              <div class="col-md-6 mb-3">
+                <select
+                  name="client_id"
+                  class="form-control"
+                  [(ngModel)]="form.client_id"
+                  aria-label="ngSelected"
+                >
+                  <option ng-selected="expression">Client Name</option>
+                  <option *ngFor="let pro of ClientList" [ngValue]="pro.id">
+                    {{ pro.name }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-6 create">
+                <div class="input-group mb-3">
+                  <input
+                    type="text"
+                    name="user id"
+                    class="form-control"
+                    aria-label="Default"
+                    [(ngModel)]="form.user_id"
+                    placeholder="User id"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="col-md-6 create">
+                <div class="input-group mb-3">
+                  <input
+                    type="text"
+                    name="status"
+                    class="form-control"
+                    aria-label="Default"
+                    [(ngModel)]="form.name"
+                    placeholder="Project Name"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <textarea
+                  id="w3review"
+                  name="w3review"
+                  rows="4"
+                  cols="60"
+                  class="form-control"
+                  placeholder="Description"
+                  [(ngModel)]="form.description"
+                  placeholder="Description"
+                  required
+                ></textarea>
+              </div>
+              <div class="col-md-6 create">
+                <label for="status">Status</label>
+                <div class="input-group mb-3">
+                  
+                  <select  type="text"
+                  name="Project Name"
+                  class="form-control"
+                  aria-label="Default"
+                  [(ngModel)]="form.status"
+                  placeholder="status"
+                  required>
+                  
+                  <option value="selected" >Status</option>
+                  <option>Pending</option>
+                  <option>Onhold</option>
+                  </select>
+                  
+                </div>
+              </div>
+            </div>
+            <div class="row mt-5">
+              
+            </div>
+            <div class="col-md-6">
+              <div class="input-group mb-3">
+                <input
+                  type="text"
+                  name="remarks"
+                  class="form-control"
+                  aria-label="Default"
+                  [(ngModel)]="form.remarks"
+                  placeholder="Remarks"
+                  required
+                />
+              </div>
+            </div>
+            
+    
+            <div class="">
+              <div class="col-md-6 create">
+                <input
+                  type="text"
+                  name="supervisor"
+                  class="form-control supervisor"
+                  aria-label="Default"
+                  placeholder="Supervisor"
+                  [(ngModel)]="form.supervisor"
+                  required
+                />
+              </div>
+              <div class="col-md-6 create">
+                <input
+                  type="date"
+                  name="start_date"
+                  class="form-control start_date"
+                  aria-label="Default"
+                  placeholder="Deadline"
+                  [(ngModel)]="form.start_date"
+                  required
+                />
+              </div>
+              <div class="col-md-6 create">
+                <input
+                  type="date"
+                  name="end_date"
+                  class="form-control end_date"
+                  aria-label="Default"
+                  placeholder="Deadline"
+                  [(ngModel)]="form.end_date"
+                  required
+                />
+              </div>
+            </div>
+          
+          <div class="footer text-center align-items-center mb-4">
+            <button type="submit" class="btn btn-primary" [disabled]="!taskForm.valid">
+              Submit
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    
+   </div>
+
+   

@@ -1,0 +1,482 @@
+<div class="today container-fluid page ">
+    <div class="d-flex page__box p-3 ">Projects</div>
+    <div class=" shadow p-3 ">
+      <div class=" text-center">
+        <main class="main-container">
+        <div class="serach-bar">
+          <div class="row d-flex">
+            <!-- project create start -->
+            <div class="create col-xl-4 col-md-6">
+              <button type="button" class="btn btn-primary" (click)="openModal(template)"> + Create New Project</button>
+              <div class="alert alert-danger" [hidden]="!error">
+                {{ error }}
+              </div>
+              <ng-template #template>
+                <div class="modal-dialog p-2" role="document">
+                  <form #taskForm="ngForm" (ngSubmit)="onSubmit()">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">
+                          Create New Project
+                        </h5>
+                        <button
+                          type="button"
+                          class="close1 bg-white"
+                          aria-label="Close"
+                          (click)="modalRef?.hide()"
+                        >
+                          <span aria-hidden="true" class="close1 text-dark"
+                            >Close</span
+                          >
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="row d-flex">
+                          <div class="col-md-6 mb-3">
+                            <select
+                              name="client_id"
+                              class="form-select"
+                              id="client_id"
+                              [(ngModel)]="form.client_id"
+                              placeholder="Select"
+
+                            >
+
+                              <option [ngValue]="undefined" disabled selected>Client Name </option>
+                              <option *ngFor="let pro of ClientList" [ngValue]="pro.id">
+                                {{ pro.name }}
+                              </option>
+                            </select>
+                            <!-- <label for="name" class="text-info"><small>Client Name</small></label> -->
+                            <!-- <ng-select
+              [items]="ClientList"
+              class=""
+
+              bindLabel="text"
+              bindValue="id"
+              [(ngModel)]="form.client_id"
+              placeholder="Select"
+            >
+            </ng-select> -->
+                          </div>
+
+                          <div class="col-md-6 create">
+                            <div class="input-group mb-3">
+                              <input
+                                type="text"
+                                name="Project Name"
+                                class="form-control"
+                                aria-label="Default"
+                                [(ngModel)]="form.name"
+                                placeholder="Project Name"
+                                required
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row mt-5">
+                          <div class="col-md-12 mb-3">
+                            <textarea
+                              id="w3review"
+                              name="w3review"
+                              rows="4"
+                              cols="60"
+                              class="form-control"
+                              placeholder="Description"
+                              [(ngModel)]="form.description"
+                              placeholder="Description"
+                              required
+                            ></textarea>
+                          </div>
+                        </div>
+
+                        <div class="input-group mb-3">
+                          <input
+                            type="text"
+                            name="remarks"
+                            class="form-control"
+                            aria-label="Default"
+                            [(ngModel)]="form.remarks"
+                            placeholder="Remarks"
+                            required
+                          />
+                        </div>
+
+                        <div class="row d-flex">
+                          <div class="col-md-6 create">
+                            <input
+                              type="text"
+                              name="supervisor"
+                              class="form-control supervisor"
+                              aria-label="Default"
+                              placeholder="Supervisor"
+                              [(ngModel)]="form.supervisor"
+                              required
+                            />
+                          </div>
+
+                          <div class="col-md-6 create">
+
+                            <input
+                              type="date"
+                              name="end_date"
+                              class="form-control end_date"
+                              aria-label="Default"
+                              placeholder="Deadline"
+                              [(ngModel)]="form.end_date"
+                              required
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="footer text-center align-items-center mb-4">
+                        <button type="submit" class="btn btn-primary" [disabled]="!taskForm.valid">
+                          Submit
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </ng-template>
+            </div>
+            <!-- project create end -->
+            <div class="search col-xl-4 col-md-6 inputbox">
+              <!-- <form #searchForm="ngForm" class=" d-inline-flex my-2 my-lg-0">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" class="search_bar search_text" class="form-control" name="" id="myInput"    placeholder= "Search Projects" [(ngModel)]="searchText">
+                <button type="submit" class="search_button">Search</button>
+              </form> -->
+              <input type="search" class="search_bar search_text" class="form-control bg-warning search_bar search_text  " name="" id="myInput"    placeholder= "Search Projects" [(ngModel)]="searchText">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <!-- <div class="filter col-xl-3 col-md-6">
+
+              <select  type="text" >
+                <option value="selected"class="text-primary border-0"  > <i class="fa-solid fa-filter"></i>Filter</option>
+                <option>Initiate</option>
+                <option>Pending</option>
+                <option>Onhold</option>
+                </select>
+
+
+
+              </div> -->
+
+            <div class="date col-xl-4 col-md-6">
+              <h6><i class="fa-solid fa-calendar"></i> {{date1 | date : "MMM d, yyyy"}}</h6>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="main-cards">
+
+          <div class="card">
+            <div class="card-inner">
+              <p class="text-primary">PRODUCTS</p>
+              <span class="material-icons-outlined text-blue">inventory_2</span>
+            </div>
+            <span class="text-primary font-weight-bold">249</span>
+          </div>
+
+          <div class="card">
+            <div class="card-inner">
+              <p class="text-primary">PURCHASE ORDERS</p>
+              <span class="material-icons-outlined text-orange">add_shopping_cart</span>
+            </div>
+            <span class="text-primary font-weight-bold">83</span>
+          </div>
+
+          <div class="card">
+            <div class="card-inner">
+              <p class="text-primary">SALES ORDERS</p>
+              <span class="material-icons-outlined text-green">shopping_cart</span>
+            </div>
+            <span class="text-primary font-weight-bold">79</span>
+          </div>
+
+          <div class="card">
+            <div class="card-inner">
+              <p class="text-primary">INVENTORY ALERTS</p>
+              <span class="material-icons-outlined text-red">notification_important</span>
+            </div>
+            <span class="text-primary font-weight-bold">56</span>
+          </div>
+
+        </div> -->
+
+        <!-- Table with panel -->
+
+<div class="card  narrower mt-5 table-wrapper ">
+
+    <!--Card Title-->
+    <div
+      class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center">
+      <h5>All Projects</h5>
+    </div>
+    <!--/Card Title-->
+    <div class="table-responsive">
+      <table class="table">
+        <div class="px-4">
+          <div class="table-wrapper" id="tab" >
+            <!--Table-->
+            <table class="table table-hover mb-0">
+              <!--Table head-->
+              <thead >
+                <tr>
+                  <th scope="">#</th>
+                  <th class="th-lg">
+                    Client
+                  </th>
+                  <th class="th-lg">
+                    Created By
+                  </th>
+                  <th class="th-lg">
+                     Title
+                  </th>
+                  <th class="th-lg">
+                    Description
+                  </th>
+                  <th class="th-lg ">
+                    Status
+                    <!-- *ngFor="let emp of ProjectList"> {{emp.ProjectList}} -->
+                    <!-- {{emp.status}} -->
+                    <!-- <span [ngClass]="getStatusColor(status)">Status: {{ status }}</span> -->
+                  </th>
+                  <th class="th-lg">
+                    Suppervisor
+                  </th>
+                  <th class="th-lg">
+                    Remarks
+                  </th>
+                  <th class="th-lg">
+                    Start Date
+                  </th>
+                  <th class="th-lg">
+                    End Date
+                  </th>
+                  <th class="th-lg">
+                    Action
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr  *ngFor="let emp of ProjectList | paginate: {itemsPerPage: 4, currentPage: emp} | search: searchText">
+                  <td>{{emp.id}}</td>
+                  <td>{{emp.client.name}}</td>
+                  <td>{{emp.user.last_name}}</td>
+                  <td>{{emp.name}}</td>
+                  <td>
+                    <div class="scrollable-cell  p-0 " >
+                      <textarea disabled class=" cell p-2 bg-white" rows="5" cols="15" onscroll="showScrollValue()">{{emp.description}}</textarea>
+                      </div>
+                  </td>
+                  <!-- //[ngStyle]="{'color': (cell.content === 'Initiate') ? 'green' : (cell.content === 'Pending') ? 'red' : (cell.content === 'Onhold') ? 'yellow' : ''}" -->
+                  <td [ngClass]="getStatusClass(emp.status)" ><span class="status text-center">{{emp.status}}</span></td>
+                  <td>{{emp.supervisor}}</td>
+                  <td>{{emp.remarks}}</td>
+                  <td>{{emp.start_date}}</td>
+                  <td>{{emp.end_date}}</td>
+                  <td><button type="button" class="btn btn-danger text-white btn-sm m-1 p-1" (click)="deleteProject(emp.id)"><i class="fa-solid fa-trash"></i> Delete</button>
+                  <!-- <button class="btn btn-primary text-white btn-sm " routerLink="/projectEdit/{{emp.id}}"><i class="fa-solid fa-pen-to-square"></i> Edit</button> -->
+                  <button class="btn btn-primary text-white btn-sm" (click)="openModal(update)" (click)="edit(emp)"><i class="fa-solid fa-pen-to-square"></i> Edit</button>
+                  <button class="btn btn-success text-white btn-sm m-1 p-1" routerLink="/projectDetails/{{emp.id}}" ><i class="fa-solid fa-eye"></i> Details</button>
+                </td>
+                </tr>
+              </tbody>
+              <!--Table body-->
+            </table>
+            <pagination-controls (pageChange)="emp = $event" class="folat-right">
+
+            </pagination-controls>
+            <!--Table-->
+          </div>
+        </div>
+      </table>
+    </div>
+    <ng-template #update>
+      <div class="modal-dialog mt-0 p-2" role="document">
+          <div class="modal-dialog" role="document">
+            <form #taskForm="ngForm" (ngSubmit)="on_Submit()">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">
+                    Update Project
+                  </h5>
+                  <button
+                    type="button"
+                    class="close1 bg-white"
+                    aria-label="Close"
+                    (click)="modalRef?.hide()"
+                  >
+                    <span aria-hidden="true" class="close1 text-dark"
+                      >Close</span
+                    >
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="row d-flex">
+                    <div class="col-md-6 create">
+                      <label for="name" class="text-info"><small>Project ID</small></label>
+                      <div class="input-group mb-3">
+
+                        <input
+                    type="text"
+                    name="Project id"
+                    class="form-control"
+                    aria-label="Default"
+                    [(ngModel)]="projectUpdate.id"
+                    placeholder="Project id"
+                    required
+                  />
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label for="name" class="text-info"><small>Client Name</small></label>
+                      <select
+                        name="client_id"
+                        class="form-select"
+                        [(ngModel)]="projectUpdate.client_id"
+                        placeholder="Select"
+                      >
+                        <option [ngValue]="undefined" disabled >Client Name</option>
+                        <option *ngFor="let pro of ClientList" [ngValue]="pro.id">
+                          {{ pro.name }}
+                        </option>
+                      </select>
+
+                      <!-- <ng-select
+        [items]="ClientList"
+        class=""
+
+        bindLabel="text"
+        bindValue="id"
+        [(ngModel)]="form.client_id"
+        placeholder="Select"
+      >
+      </ng-select> -->
+                    </div>
+                  </div>
+                  <div class="col-md-6 create">
+                    <label for="name" class="text-info"><small>Project Name</small></label>
+                    <div class="input-group mb-3">
+
+                      <input
+                        type="text"
+                        name="Project Name"
+                        class="form-control"
+                        aria-label="Default"
+                        [(ngModel)]="projectUpdate.name"
+                        placeholder="Project Name"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="row mt-5">
+                    <label for="name" class="text-info"><small>Description</small></label>
+                    <div class="col-md-12 mb-3">
+                      <textarea
+                        id="w3review"
+                        name="w3review"
+                        rows="4"
+                        cols="60"
+                        class="form-control"
+                        placeholder="Description"
+                        [(ngModel)]="projectUpdate.description"
+                        placeholder="Description"
+                        required
+                      ></textarea>
+                    </div>
+                  </div>
+                  <div class="row d-flex">
+
+                      <div class="col-md-6 create">
+                        <label for="name" class="text-info"><small>Status</small></label>
+                        <div class="input-group mb-4">
+
+                          <select  type="text"
+                          name="Status"
+                          class="form-select"
+                          aria-label="Default"
+                          [(ngModel)]="projectUpdate.status"
+                          placeholder="status"
+                          required>
+
+                          <option value="selected" disabled selected class="text-primary" >Status</option>
+                          <option >Initiate</option>
+                          <option>Pending</option>
+                          <option>Onhold</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-md-6 create">
+                        <label for="name" class="text-info"><small>Remarks</small></label>
+                        <div class="input-group ">
+                          <input
+                            type="text"
+                            name="remarks"
+                            class="form-control"
+                            aria-label="Default"
+                            [(ngModel)]="projectUpdate.remarks"
+                            placeholder="Remarks"
+                            required
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  <div class="row d-flex">
+
+                    <div class="col-md-6 create">
+                      <label for="name" class="text-info"><small>Supervisor</small></label>
+                      <input
+                        type="text"
+                        name="supervisor"
+                        class="form-control supervisor"
+                        aria-label="Default"
+                        placeholder="Supervisor"
+                        [(ngModel)]="projectUpdate.supervisor"
+                        required
+                      />
+                    </div>
+                    <div class="col-md-6 create">
+                      <label for="name" class="text-info"><small>Start Date</small></label>
+                      <input
+                        type="date"
+                        name="start_date"
+                        class="form-control start_date"
+                        aria-label="Default"
+                        placeholder="Deadline"
+                        [(ngModel)]="projectUpdate.start_date"
+                        required
+                      />
+
+                    </div>
+                    <label for="name" class="text-info"><small>End Date</small></label>
+                    <div class="col-md-6 create ">
+                      <input
+                        type="date"
+                        name="end_date"
+                        class="form-control end_date"
+                        aria-label="Default"
+                        placeholder="Deadline"
+                        [(ngModel)]="projectUpdate.end_date"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="footer text-center align-items-center mb-4">
+                  <button type="submit" class="btn btn-primary" [disabled]="!taskForm.valid">
+                    Update
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+      </div>
+    </ng-template>
+  </div>
+  <!-- Table with panel -->
+      </main>
+      </div>
+    </div>
+  </div>
